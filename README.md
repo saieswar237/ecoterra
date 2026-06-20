@@ -1,4 +1,4 @@
-# 🌍 EcoTerra: The Living Carbon Engine V1.2
+#  EcoTerra: The Living Carbon Engine V1.2
 
 [![Deploy Status](https://img.shields.io/badge/Vercel-Deployed-success.svg)](#) 
 [![Accessibility](https://img.shields.io/badge/WCAG-Compliant-blue.svg)](#) 
@@ -11,14 +11,14 @@ EcoTerra is an interactive, gamified carbon footprint awareness platform built f
 
 ---
 
-## 🎯 The Core Philosophy: Awareness Through Gamification
+##  The Core Philosophy: Awareness Through Gamification
 Data alone rarely changes human behavior—visual consequences do. By tying a user's carbon score to the physical health of a digital island, abstract carbon metrics become immediate, emotional, and personal. 
 * **Positive Actions** (e.g., public transit, plant-based meals) heal the island, resulting in clear skies and lush trees.
 * **Negative Actions** (e.g., solo driving, high energy waste) degrade the island into a smog-choked wasteland.
 
 ---
 
-## 🏆 Hackathon Evaluation Metrics Fulfilled
+##  Hackathon Evaluation Metrics Fulfilled
 
 This application was engineered via AI orchestration (Google AI Studio / Gemini) with strict prompts to fulfill the 5 core evaluation pillars of Challenge 3:
 
@@ -44,7 +44,7 @@ This application was engineered via AI orchestration (Google AI Studio / Gemini)
 
 ---
 
-## 🛠️ Tech Stack & AI Orchestration
+##  Tech Stack & AI Orchestration
 * **Frontend:** React.js
 * **Styling:** Tailwind CSS
 * **Deployment:** Vercel 
@@ -53,7 +53,7 @@ This application was engineered via AI orchestration (Google AI Studio / Gemini)
 
 ---
 
-## 🚀 Local Setup Instructions
+##  Local Setup Instructions
 
 To run this project locally:
 
