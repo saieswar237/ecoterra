@@ -1,0 +1,6 @@
+{
+  "name": "EcoTerra",
+  "description": "An interactive, gamified carbon footprint awareness platform with a dynamic, living digital island that thrives or degrades based on carbon impact.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

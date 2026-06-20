@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Custom Ecosystem Animation Keyframes */
+@keyframes eco-float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes eco-sway {
+  0% { transform: rotate(-1.5deg); }
+  50% { transform: rotate(1.5deg); }
+  100% { transform: rotate(-1.5deg); }
+}
+
+@keyframes eco-rain {
+  0% { transform: translate(15px, -20px); opacity: 0; }
+  20% { opacity: 0.7; }
+  80% { opacity: 0.7; }
+  100% { transform: translate(-15px, 80px); opacity: 0; }
+}
+
+@keyframes eco-drift-slow {
+  0% { transform: translateX(-12px); }
+  50% { transform: translateX(12px); }
+  100% { transform: translateX(-12px); }
+}
+
+@keyframes eco-smog-pulse {
+  0% { opacity: 0.45; transform: scale(1.0); }
+  50% { opacity: 0.65; transform: scale(1.03); }
+  100% { opacity: 0.45; transform: scale(1.0); }
+}
+
+/* Applying animation helper classes */
+.animate-eco-float {
+  animation: eco-float 7s ease-in-out infinite;
+}
+
+.animate-eco-sway-left {
+  animation: eco-sway 8s ease-in-out infinite;
+  transform-origin: 110px 245px;
+}
+
+.animate-eco-sway-center {
+  animation: eco-sway 11s ease-in-out infinite;
+  transform-origin: 195px 245px;
+}
+
+.animate-eco-rain-1 {
+  animation: eco-rain 1.4s linear infinite;
+}
+
+.animate-eco-rain-2 {
+  animation: eco-rain 1.9s linear infinite;
+  animation-delay: 0.5s;
+}
+
+.animate-eco-rain-3 {
+  animation: eco-rain 1.6s linear infinite;
+  animation-delay: 0.25s;
+}
+
+.animate-eco-drift-cloud {
+  animation: eco-drift-slow 16s ease-in-out infinite;
+}
+
+.animate-eco-smog-cloud {
+  animation: eco-smog-pulse 9s ease-in-out infinite;
+  transform-origin: 200px 140px;
+}
