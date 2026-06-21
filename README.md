@@ -48,7 +48,7 @@ This application was engineered via AI orchestration (Google AI Studio / Gemini)
 * **Frontend:** React.js
 * **Styling:** Tailwind CSS
 * **Deployment:** Vercel 
-* **AI Orchestrator:** Gemini 1.5 Pro (via Google AI Studio)
+* **AI Orchestrator:** Gemini 3.5 Pro (via Google AI Studio)
 * **Prompt Strategy:** "Mega-Prompting." Instead of line-by-line coding, the AI was given a master context prompt explicitly mandating the Hack2Skill evaluation metrics (WCAG compliance, useMemo efficiency, and XSS sanitization) to generate the baseline architecture, allowing human focus on UI/UX and behavioral flow.
 
 ---
