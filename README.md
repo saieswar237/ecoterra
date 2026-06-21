@@ -31,12 +31,6 @@ This project was engineered to maximize performance, accessibility, and security
 
 ---
 
-## 🚀 View the AI Blueprint
-Explore the original orchestration and prompt structure directly in AI Studio:  
-👉 **[View EcoTerra App in Google AI Studio](https://ai.studio/apps/49c671e5-aafd-49fe-b3e8-79ae62f99a48)**
-
----
-
 ## 💻 Run Locally
 
 **Prerequisites:** Node.js installed on your machine.
