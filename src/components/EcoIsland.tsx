@@ -95,7 +95,7 @@ export const EcoIsland: React.FC<EcoIslandProps> = React.memo(({ ecoScore }) => 
         </div>
         <div className="flex flex-col items-end">
           <span className="text-xs font-mono text-slate-400">Eco Score</span>
-          <span className={`text-2xl font-bold font-mono tracking-tight transition-colors duration-500 ${
+          <span data-testid="eco-score" className={`text-2xl font-bold font-mono tracking-tight transition-colors duration-500 ${
             state === 'optimal' ? 'text-emerald-500' :
             state === 'moderate' ? 'text-amber-500' :
             'text-rose-500'
@@ -121,6 +121,7 @@ export const EcoIsland: React.FC<EcoIslandProps> = React.memo(({ ecoScore }) => 
       <div className="relative w-full max-w-[360px] aspect-square flex items-center justify-center">
         <svg
           id="eco-island-svg"
+          data-testid="eco-island-svg"
           viewBox="0 0 400 400"
           className="w-full h-full drop-shadow-lg select-none"
           role="img"

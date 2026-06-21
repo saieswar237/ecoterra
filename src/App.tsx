@@ -260,11 +260,11 @@ export default function App(): React.ReactElement {
           <div className="flex items-center gap-3 text-xs font-sans">
             <div className="hidden md:flex flex-col items-end pr-4 border-r border-slate-100">
               <span className="text-2xs font-mono uppercase tracking-wider text-slate-400">Total Activities</span>
-              <span className="text-sm font-semibold font-mono text-slate-800">{history.length} logged</span>
+              <span className="text-sm font-semibold font-mono text-slate-800" data-testid="header-total-actions">{history.length} logged</span>
             </div>
             <div className="hidden md:flex flex-col items-end pr-4 border-r border-slate-100">
               <span className="text-2xs font-mono uppercase tracking-wider text-slate-400">Carbon Trend</span>
-              <span className={`text-sm font-semibold font-mono flex items-center gap-1 ${totalOffset >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
+              <span className={`text-sm font-semibold font-mono flex items-center gap-1 ${totalOffset >= 0 ? 'text-emerald-600' : 'text-rose-600'}`} data-testid="header-carbon-trend">
                 {totalOffset >= 0 ? '+' : ''}{totalOffset} Offset
               </span>
             </div>

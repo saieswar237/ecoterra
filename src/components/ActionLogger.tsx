@@ -220,6 +220,7 @@ export const ActionLogger: React.FC<ActionLoggerProps> = ({ onLogAction, ecoScor
         <div 
           className="p-3 text-xs bg-rose-50 text-rose-800 rounded-xl border border-rose-150 flex items-center gap-2 animate-pulse" 
           role="alert"
+          data-testid="error-message"
           aria-live="assertive"
         >
           <ShieldAlert className="w-4 h-4 shrink-0 text-rose-600" />
@@ -255,6 +256,7 @@ export const ActionLogger: React.FC<ActionLoggerProps> = ({ onLogAction, ecoScor
               <button
                 key={action.id}
                 onClick={() => handleQuickLog(action)}
+                data-testid="quick-action-button"
                 aria-label={`Log ${action.name}. Impact is ${action.impact > 0 ? 'plus' : 'minus'} ${Math.abs(action.impact)} points`}
                 className={isPositive ? QUICK_ACTION_POSITIVE_STYLE : QUICK_ACTION_NEGATIVE_STYLE}
               >
@@ -286,7 +288,7 @@ export const ActionLogger: React.FC<ActionLoggerProps> = ({ onLogAction, ecoScor
       <div className="border-t border-slate-100 my-1" />
 
       {/* Form Submission logic with boundary verification */}
-      <form onSubmit={handleFormSubmit} className="flex flex-col gap-3" aria-label="Custom Activity Registration Form">
+      <form onSubmit={handleFormSubmit} data-testid="action-logger-form" className="flex flex-col gap-3" aria-label="Custom Activity Registration Form">
         <span className="text-sm font-sans font-medium text-slate-700">Custom Log Entry Form</span>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -296,6 +298,7 @@ export const ActionLogger: React.FC<ActionLoggerProps> = ({ onLogAction, ecoScor
             </label>
             <input
               id="custom-action-name"
+              data-testid="input-activity-name"
               type="text"
               required
               placeholder="e.g. Composted kitchen waste"
@@ -317,6 +320,7 @@ export const ActionLogger: React.FC<ActionLoggerProps> = ({ onLogAction, ecoScor
             <div className="relative flex items-center">
               <input
                 id="custom-action-impact"
+                data-testid="input-impact-score"
                 type="number"
                 min={-100} // intentionally wider in client limits to let user test boundary errors
                 max={100}
@@ -359,6 +363,7 @@ export const ActionLogger: React.FC<ActionLoggerProps> = ({ onLogAction, ecoScor
 
           <button
             type="submit"
+            data-testid="submit-custom-log"
             aria-label="Securely submit custom climate activity"
             className="w-full py-2 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-sans font-medium transition-all transform hover:-translate-y-0.5 active:translate-y-0 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 flex items-center justify-center gap-1.5 cursor-pointer"
           >
