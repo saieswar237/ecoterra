@@ -1,3 +1,4 @@
+// PATH: src/App.tsx
 import React, { useState, useMemo, useCallback } from 'react';
 import EcoIsland from './components/EcoIsland';
 import ActionLogger from './components/ActionLogger';
@@ -10,15 +11,12 @@ import {
   Car, 
   Plane, 
   Trash2, 
-  Lightbulb, 
   Zap, 
   Activity, 
   Utensils, 
   Award, 
   BookOpen, 
-  CheckCircle, 
   RefreshCw, 
-  HelpCircle, 
   Info,
   Calendar,
   Layers,
@@ -28,7 +26,15 @@ import {
   Download
 } from 'lucide-react';
 
-export default function App() {
+/**
+ * Main App Component
+ * Serves as the central state engine for EcoTerra V1.2.
+ * Coordinates carbon ledger history, synchronized localStorage updates, environmental grades,
+ * and passes the calculated state down to nested interactive simulation components.
+ *
+ * @returns {React.ReactElement} The visual main framework of the EcoAuditor dashboard.
+ */
+export default function App(): React.ReactElement {
   // Global ecoScore state (default 100, synced to localStorage for reliability)
   const [ecoScore, setEcoScore] = useState<number>(() => {
     const saved = localStorage.getItem('ecoterra_score');
@@ -44,18 +50,24 @@ export default function App() {
   // Ledger filter categorization state
   const [ledgerFilter, setLedgerFilter] = useState<string>('all');
 
-  // Filtered ledger items using useMemo (Efficiency Mandate)
+  /**
+   * Efficiency Metric: Filtered ledger items using useMemo (prevents unnecessary sorting/filtering cycles)
+   */
   const filteredHistory = useMemo(() => {
     if (ledgerFilter === 'all') return history;
     return history.filter(item => item.category === ledgerFilter);
   }, [history, ledgerFilter]);
 
-  // Efficiency Metric: useMemo to calculate the total carbon offset trend trend so the app doesn't re-render unnecessarily
+  /**
+   * Efficiency Metric: useMemo to calculate the total carbon offset trend to prevent excessive calculations during renders
+   */
   const totalOffset = useMemo(() => {
     return history.reduce((sum, item) => sum + item.impact, 0);
   }, [history]);
 
-  // Net Viability process ring calculations
+  /**
+   * Performance optimizer calculating circle-dash offsets dynamically for the physical UI ring.
+   */
   const netViabilityRing = useMemo(() => {
     const radius = 18;
     const circumference = 2 * Math.PI * radius;
@@ -74,7 +86,12 @@ export default function App() {
     };
   }, [ecoScore]);
 
-  // Efficiency Metric: useCallback for the logging function
+  /**
+   * Callback logging function allowing secure appending of historical actions.
+   * Locked carefully in useCallback to guard children rendering performance.
+   *
+   * @param {Omit<EcoAction, 'id'>} action - Sanitsed action payload containing description, category, and impact.
+   */
   const handleLogAction = useCallback((action: Omit<EcoAction, 'id'>) => {
     const uniqueId = String(Date.now()) + '-' + Math.random().toString(36).substring(2, 9);
     
@@ -104,7 +121,12 @@ export default function App() {
     });
   }, []);
 
-  // Delete logged item and revert its action scores safely
+  /**
+   * Safely deletes logged item and cleanly reverts their respective delta scores.
+   *
+   * @param {string} id - The specific targeted item log UUID.
+   * @param {number} impact - The carbon offset score recorded on this action.
+   */
   const handleDeleteItem = useCallback((id: string, impact: number) => {
     setHistory((prev) => {
       const nextHistory = prev.filter(item => item.id !== id);
@@ -121,7 +143,9 @@ export default function App() {
     });
   }, []);
 
-  // Clear all states: reset eco score back to 100 and empty the activity log history
+  /**
+   * Resets the client cache and deletes all localized histories, restoring pristine health status.
+   */
   const handleResetApp = useCallback(() => {
     if (window.confirm("Are you sure you want to reset your EcoTerra island to pristine health status? This will wipe your history log.")) {
       setEcoScore(100);
@@ -131,7 +155,9 @@ export default function App() {
     }
   }, []);
 
-  // Export entire activity history as JSON file (Durable History Export)
+  /**
+   * Packages entire ledger database inside a clean JSON schema bundle for localized audit logging.
+   */
   const handleExportJSON = useCallback(() => {
     if (history.length === 0) return;
     const exportData = {
@@ -150,7 +176,9 @@ export default function App() {
     downloadAnchor.remove();
   }, [history, ecoScore, totalOffset]);
 
-  // Carbon advice insights memo
+  /**
+   * Computes reactive environmental advice corresponding to the active climate grade using useMemo.
+   */
   const currentLevelTips = useMemo(() => {
     if (ecoScore > 70) {
       return {
@@ -188,8 +216,13 @@ export default function App() {
     }
   }, [ecoScore]);
 
-  // Helper renderer to retrieve Lucide Icon based on action classification
-  const getCategoryIcon = (category: string) => {
+  /**
+   * Helper utility retrieving beautiful icon classes mapping to unique categorization logs.
+   *
+   * @param {string} category - Specific tag describing action type (e.g. food, transport).
+   * @returns {React.ReactElement} Dynamic rendering of the Lucide-react symbol.
+   */
+  const getCategoryIcon = (category: string): React.ReactElement => {
     switch (category) {
       case 'transport': return <Plane className="w-4 h-4 text-indigo-600" />;
       case 'food': return <Utensils className="w-4 h-4 text-amber-600" />;
@@ -265,7 +298,6 @@ export default function App() {
         
         {/* Intro banner */}
         <section className="bg-gradient-to-r from-emerald-600 via-emerald-700 to-teal-800 rounded-3xl p-6 md:p-8 text-white shadow-xl shadow-emerald-950/10 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
-          {/* Subtle vectors */}
           <div className="absolute right-0 bottom-0 top-0 w-1/3 opacity-5 pointer-events-none bg-[radial-gradient(circle_at_bottom_right,white,transparent)]" />
           
           <div className="flex-1">
@@ -402,7 +434,7 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="mt-4 flex items-center gap-1.5 text-[10px] text-slate-400 font-mono justify-center border-t border-slate-850 pt-3">
+              <div className="mt-4 flex items-center gap-1.5 text-[10px] text-slate-400 font-mono justify-center border-t border-slate-800 pt-3">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
                 <span>Encrypted Client-Side Vault Protection</span>
               </div>
@@ -421,7 +453,7 @@ export default function App() {
                     <Calendar className="w-5 h-5 text-emerald-600" />
                     <h3 className="text-base font-sans font-semibold text-slate-800">Carbon Log Ledger</h3>
                   </div>
-                  <div className="flex items-center gap-2 animate-fade-in">
+                  <div className="flex items-center gap-2">
                     <span className="text-xs font-mono text-slate-400 bg-slate-50 px-2 py-1 rounded-lg">
                       {filteredHistory.length} listed
                     </span>
@@ -450,12 +482,6 @@ export default function App() {
                       aria-selected={ledgerFilter === cat}
                       tabIndex={0}
                       onClick={() => setLedgerFilter(cat)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          setLedgerFilter(cat);
-                        }
-                      }}
                       className={`text-[9px] uppercase font-mono px-2 py-0.5 rounded-md border transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-emerald-500/40 ${
                         ledgerFilter === cat
                           ? 'bg-emerald-600 text-white border-transparent'
@@ -473,8 +499,8 @@ export default function App() {
                 <AnimatePresence initial={false}>
                   {filteredHistory.length === 0 ? (
                     <div className="flex flex-col items-center justify-center py-24 text-center text-slate-400 gap-2 flex-1">
-                      <Layers className="w-8 h-8 text-slate-350" />
-                      <p className="text-sm font-sans font-medium text-slate-500 text-slate-400">No matching items in this category ledger.</p>
+                      <Layers className="w-8 h-8 text-slate-300" />
+                      <p className="text-sm font-sans font-medium text-slate-500">No matching items in this category ledger.</p>
                       <p className="text-2xs font-mono max-w-xs uppercase tracking-wider text-slate-400">Tap quick action items or submit customized inputs to populate ledger items.</p>
                     </div>
                   ) : (
@@ -489,7 +515,7 @@ export default function App() {
                         id={`logged-item-${item.id}`}
                       >
                         <div className="flex items-center gap-3 min-w-0">
-                          <div className="w-8 h-8 bg-white border border-slate-100 rounded-lg flex items-center justify-center shrink-0 shadow-3xs">
+                          <div className="w-8 h-8 bg-white border border-slate-100 rounded-lg flex items-center justify-center shrink-0 shadow-sm">
                             {getCategoryIcon(item.category)}
                           </div>
                           <div className="min-w-0">
@@ -507,7 +533,6 @@ export default function App() {
                             {item.impact > 0 ? `+${item.impact}` : item.impact}
                           </span>
                           
-                          {/* Reversible Action: Delete item logs dynamically */}
                           <button
                             onClick={() => handleDeleteItem(item.id, item.impact)}
                             aria-label={`Invert log and delete "${item.name}"`}

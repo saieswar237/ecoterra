@@ -1,12 +1,26 @@
+// PATH: src/components/EcoIsland.tsx
 import React, { useMemo, useState, useEffect } from 'react';
 import { IslandState } from '../types';
 import { Volume2, VolumeX } from 'lucide-react';
 import { ecoAudio } from '../utils/audio';
 
+/**
+ * Properties expected by the EcoIsland Component.
+ */
 interface EcoIslandProps {
   ecoScore: number;
 }
 
+/**
+ * EcoIsland Component
+ * Renders an immersive, procedurally stylized 2D island ecosystem using high fidelity inline SVGs.
+ * Adapts between dynamic biological landscapes (Thriving Oasis, Overcast Autumn, Toxic Wasteland)
+ * matching the current user-authored carbon score.
+ * Explores procedurally generated sounds matching the ecological ambient state.
+ *
+ * @param {EcoIslandProps} props - Properties containing the validated score input.
+ * @returns {React.ReactElement} Active visual island representation with dynamic web-audio capabilities.
+ */
 export const EcoIsland: React.FC<EcoIslandProps> = React.memo(({ ecoScore }) => {
   const [isAudioPlaying, setIsAudioPlaying] = useState<boolean>(false);
 
